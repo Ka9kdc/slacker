@@ -1,6 +1,17 @@
 const router = require('express').Router()
-const {Messages} = require('../db/models')
+const {Messages, User} = require('../db/models')
 module.exports = router
+
+router.get('/', async (req, res, next) => {
+  try {
+    const allMessages = await Messages.findAll({
+      include: {model: User, attributes: ['username', 'fullName', 'imgUrl']}
+    })
+    res.send(allMessages)
+  } catch (error) {
+    next(error)
+  }
+})
 
 router.post('/', async (req, res, next) => {
   try {

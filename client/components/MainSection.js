@@ -33,7 +33,7 @@ const MainSection = props => {
         </button>
       )}
       <MessageBox />
-      <NewMessage />
+      <NewMessage currentChannel={currentChannel} />
     </div>
   )
 }

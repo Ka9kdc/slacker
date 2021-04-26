@@ -7,7 +7,7 @@ const NewMessage = props => {
 
   const submitMessage = evt => {
     evt.preventDefault()
-    props.addMessage(text)
+    props.addMessage(text, props.currentChannel)
     setMessage('')
   }
 
@@ -23,7 +23,7 @@ const NewMessage = props => {
 
 const mapDispatch = dispatch => {
   return {
-    addMessage: text => dispatch(createMessage(text))
+    addMessage: (text, channelId) => dispatch(createMessage(text, channelId))
   }
 }
 

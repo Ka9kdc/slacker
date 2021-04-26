@@ -20,7 +20,8 @@ router.post('/', async (req, res, next) => {
     const newMessage = await Messages.create({
       text: message.text,
       date: new Date(),
-      userId: req.user.id
+      userId: req.user.id,
+      channelId: message.channelId
     })
     res.send(newMessage)
   } catch (error) {

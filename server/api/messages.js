@@ -14,7 +14,6 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-  console.log(req.body)
   try {
     const message = req.body
     const newMessage = await Messages.create({

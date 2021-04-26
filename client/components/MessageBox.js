@@ -26,7 +26,7 @@ const MessageBox = props => {
                   type="button"
                   onClick={() => props.startEditting(message.id)}
                 >
-                  edit
+                  Edit
                 </button>
                 <button
                   type="button"

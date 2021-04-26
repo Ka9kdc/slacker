@@ -62,7 +62,8 @@ export const createMessage = text => {
       console.log(text)
       const res = await axios.post('/api/messages', {text})
       dispatch(addMessage(res.data))
-      socket.emit('new Message', res.data)
+
+      socket.emit('new message', res.data)
     } catch (error) {
       console.error(error.message)
     }

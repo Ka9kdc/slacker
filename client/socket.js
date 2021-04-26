@@ -9,12 +9,10 @@ socket.on('connect', () => {
 })
 
 socket.on('new message', message => {
-  console.log(message)
   store.dispatch(addMessage(message))
 })
 
 socket.on('update message', message => {
-  console.log(message)
   store.dispatch(updateMessage(message))
 })
 

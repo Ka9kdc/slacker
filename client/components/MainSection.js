@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {fetchMessages} from '../store/messages'
 import MessageBox from './MessageBox'
 import {connect} from 'react-redux'
+import NewMessage from './NewMessage'
 
 const MainSection = props => {
   const [currentChannel, setChannel] = useState(0)
@@ -16,6 +17,7 @@ const MainSection = props => {
         current Channel = {currentChannel}
       </button>
       <MessageBox />
+      <NewMessage />
     </div>
   )
 }

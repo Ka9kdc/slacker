@@ -1,8 +1,9 @@
 import React from 'react'
-import {connect} from '../../server/auth'
+import {connect} from 'react-redux'
 import {deleteMessage} from '../store/messages'
 
 const MessageBox = props => {
+  console.log(props.messages)
   return (
     <div>
       {props.messages &&

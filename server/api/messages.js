@@ -4,6 +4,7 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log('nochannel')
     const allMessages = await Messages.findAll({
       include: {model: User, attributes: ['username', 'fullName', 'imgUrl']}
     })

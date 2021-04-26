@@ -13,6 +13,7 @@ const loggedInUser = (req, res, next) => {
 
 router.use('/users', require('./users'))
 router.use('/messages', loggedInUser, require('./messages'))
+router.use('/channels', loggedInUser, require('./channels'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')

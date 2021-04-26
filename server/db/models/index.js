@@ -1,5 +1,6 @@
 const User = require('./user')
 const Messages = require('./messages')
+const Channel = require('./channels')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -15,11 +16,17 @@ const Messages = require('./messages')
  * instead of: const User = require('../db/models/user')
  */
 
-
 User.hasMany(Messages)
 Messages.belongsTo(User)
 
+Channel.hasMany(Messages)
+Messages.belongsTo(Channel)
+
+Channel.belongsToMany(User, {through: 'channel_user'})
+User.belongsToMany(Channel, {through: 'channel_user'})
+
 module.exports = {
   User,
-  Messages
+  Messages,
+  Channel
 }

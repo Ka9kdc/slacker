@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Channel} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -12,6 +12,12 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
+  const channels = await Promise.all([
+    Channel.create({name: 'General'}),
+    Channel.create({name: 'Random'})
+  ])
+
+  await Promise.all([channels[0].setUsers(users), channels[1].setUsers(users)])
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }

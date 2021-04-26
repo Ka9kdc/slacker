@@ -3,11 +3,11 @@ import {fetchMessages} from '../store/messages'
 import MessageBox from './MessageBox'
 import {connect} from 'react-redux'
 
-const MainSection = () => {
+const MainSection = props => {
   const [currentChannel, setChannel] = useState(0)
 
   useEffect(() => {
-    fetchMessages()
+    props.fetchMessages()
   }, currentChannel)
 
   return (

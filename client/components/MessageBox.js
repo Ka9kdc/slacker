@@ -10,9 +10,12 @@ const MessageBox = props => {
         props.messages.map(message => (
           <div key={message.id}>
             <div>
-              <img src={message.user.imgUrl} />
+              {message.user &&
+                message.user.imgUrl && <img src={message.user.imgUrl} />}
               <div>
-                <h3>{message.user.username || message.user.fullName}</h3>
+                {message.user && (
+                  <h3>{message.user.username || message.user.fullName}</h3>
+                )}
                 <p>{message.date}</p>
               </div>
               <div>

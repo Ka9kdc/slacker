@@ -4,16 +4,16 @@ module.exports = io => {
 
     socket.on('new message', message => {
       console.log(message)
-      socket.broadcast('new message', message)
+      socket.emit('new message', message)
     })
 
     socket.on('update message', message => {
       console.log(message)
-      socket.broadcast('update message', message)
+      socket.emit('update message', message)
     })
 
     socket.on('delete message', messageId => {
-      socket.broadcast('delete message', messageId)
+      socket.emit('delete message', messageId)
     })
 
     socket.on('disconnect', () => {

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {deleteMessage} from '../store/messages'
+import {deleteMessage, edittingMessage} from '../store/messages'
+import EditMessage from './EditMessage'
 
 const MessageBox = props => {
   console.log(props.messages)
@@ -21,7 +22,10 @@ const MessageBox = props => {
                 <p>{message.date}</p>
               </div>
               <div>
-                <button type="button" onClick={() => console.log('edit')}>
+                <button
+                  type="button"
+                  onClick={() => props.startEditting(message.id)}
+                >
                   edit
                 </button>
                 <button
@@ -32,10 +36,14 @@ const MessageBox = props => {
                 </button>
               </div>
             </div>
-            <p>
-              {message.text}
-              <span>{message.editted ? 'editted' : ''}</span>
-            </p>
+            {message.editting ? (
+              <EditMessage message={message} />
+            ) : (
+              <p>
+                {message.text}
+                <span>{message.edited ? ' editted' : ''}</span>
+              </p>
+            )}
           </div>
         ))}
     </div>
@@ -50,7 +58,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    deleteMessage: messageId => dispatch(deleteMessage(messageId))
+    deleteMessage: messageId => dispatch(deleteMessage(messageId)),
+    startEditting: messageId => dispatch(edittingMessage(messageId))
   }
 }
 

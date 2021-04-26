@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import axios from 'axios'
 import socket from '../socket'
 
@@ -5,6 +6,7 @@ const GET_MESSAGES = 'GET_MESSAGES'
 const ADD_MASSAGE = 'ADD_MASSAGES'
 const UPDATE_MESSAGE = 'UPDATE_MESSAGE'
 const REMOVE_MESSAGE = 'REMOVE_MESSAGE'
+const EDITTING_MESSAGE = 'EDITTING_MESSAGE'
 
 const initalMessages = []
 
@@ -19,6 +21,13 @@ export const addMessage = message => {
   return {
     type: ADD_MASSAGE,
     message
+  }
+}
+
+export const edittingMessage = messageId => {
+  return {
+    type: EDITTING_MESSAGE,
+    messageId
   }
 }
 
@@ -63,7 +72,7 @@ export const createMessage = text => {
 export const editMessage = message => {
   return async dispatch => {
     try {
-      const res = await axios.post(`api/messages/${message.id}`, message)
+      const res = await axios.put(`api/messages/${message.id}`, message)
       dispatch(updateMessage(res.data))
       socket.emit('update message', res.data)
     } catch (error) {
@@ -102,6 +111,14 @@ export const messageReducer = (state = initalMessages, action) => {
     case REMOVE_MESSAGE:
       const remaining = state.filter(message => message.id !== action.messageId)
       return remaining
+    case EDITTING_MESSAGE:
+      const edittingmessages = state.map(message => {
+        if (message.id === action.messageId) {
+          message.editting = true
+        }
+        return message
+      })
+      return edittingmessages
     default:
       return state
   }

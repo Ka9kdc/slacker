@@ -45,10 +45,10 @@ export const removeMessage = messageId => {
   }
 }
 
-export const fetchMessages = () => {
+export const fetchMessages = channelId => {
   return async dispatch => {
     try {
-      const res = await axios.get('/api/messages')
+      const res = await axios.get(`/api/channels/${channelId}`)
       dispatch(getMessages(res.data))
     } catch (error) {
       console.error(error.message)

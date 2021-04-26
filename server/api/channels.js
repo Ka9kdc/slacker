@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/channelId', async (req, res, next) => {
+router.get('/:channelId', async (req, res, next) => {
   try {
     const allMessages = await Messages.findAll({
       where: {channelId: req.params.channelId},

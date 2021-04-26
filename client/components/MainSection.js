@@ -4,20 +4,26 @@ import MessageBox from './MessageBox'
 import {connect} from 'react-redux'
 import NewMessage from './NewMessage'
 import ProfileSection from './ProfileSection'
+import ChannelOptions from './ChannelOptions'
 
 const MainSection = props => {
   const [currentChannel, setChannel] = useState(0)
   const [editProfile, setEditProfile] = useState(false)
 
-  useEffect(() => {
-    props.fetchMessages()
-  }, currentChannel)
-  console.log(editProfile, props.user)
+  useEffect(
+    () => {
+      if (currentChannel !== 0) {
+        props.fetchMessages(currentChannel)
+      } else if (props.channels && props.channels.length) {
+        setChannel(props.channels[0].id)
+      }
+    },
+    [props.channels, currentChannel]
+  )
+
   return (
     <div>
-      <button type="button" onClick={() => setChannel(currentChannel + 1)}>
-        current Channel = {currentChannel}
-      </button>
+      <ChannelOptions setChannel={setChannel} />
       {(props.user && (!props.user.fullName || !props.user.username)) ||
       editProfile ? (
         <ProfileSection setEditProfile={setEditProfile} />
@@ -34,13 +40,14 @@ const MainSection = props => {
 
 const mapState = state => {
   return {
-    user: state.user
+    user: state.user,
+    channels: state.channels
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    fetchMessages: () => dispatch(fetchMessages())
+    fetchMessages: channelId => dispatch(fetchMessages(channelId))
   }
 }
 

@@ -16,7 +16,6 @@ const ProfileSection = props => {
       updateObj.username = username
     }
     props.updateProfile(updateObj)
-    console.log('hello')
     props.setEditProfile(false)
   }
 

@@ -14,10 +14,8 @@ const setChannels = channels => {
 export const fetchChannels = () => {
   return async dispatch => {
     try {
-      console.log('fetching channels')
       const res = await axios('/api/channels')
       dispatch(setChannels(res.data))
-      console.log(res.data)
     } catch (error) {
       console.error(error)
     }

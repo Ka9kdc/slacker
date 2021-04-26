@@ -9,7 +9,6 @@ const ChannelOptions = props => {
           <button
             type="button"
             onClick={() => {
-              console.log(channel)
               props.setChannel(channel.id)
             }}
             key={channel.id}

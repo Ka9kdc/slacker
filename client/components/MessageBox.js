@@ -4,7 +4,6 @@ import {deleteMessage, edittingMessage} from '../store/messages'
 import EditMessage from './EditMessage'
 
 const MessageBox = props => {
-  console.log(props.messages)
   return (
     <div>
       {props.messages &&

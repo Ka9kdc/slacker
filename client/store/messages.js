@@ -59,7 +59,6 @@ export const fetchMessages = channelId => {
 export const createMessage = (text, channelId) => {
   return async dispatch => {
     try {
-      console.log(text)
       const res = await axios.post('/api/messages', {text, channelId})
       dispatch(addMessage(res.data))
 

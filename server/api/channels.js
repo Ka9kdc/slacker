@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Messages, User, Channel} = require('../db/models')
+const {Messages, User} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {

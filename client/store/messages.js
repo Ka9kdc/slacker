@@ -74,7 +74,7 @@ export const editMessage = message => {
 export const deleteMessage = messageId => {
   return async dispatch => {
     try {
-      await axios.delete(`/apu/messages/${messageId}`)
+      await axios.delete(`/api/messages/${messageId}`)
       dispatch(removeMessage(messageId))
       socket.emit('delete message', messageId)
     } catch (error) {

@@ -64,6 +64,7 @@ router.delete('/:messageId', async (req, res, next) => {
       newError.code = 400
       throw newError
     } else if (req.user.id !== Number(message.userId)) {
+      console.log(req.user.id, message.userId)
       const newError = Error('Not your Message. Can not delete')
       newError.code = 401
       throw newError

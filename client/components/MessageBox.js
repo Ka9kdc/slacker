@@ -14,7 +14,9 @@ const MessageBox = props => {
                 message.user.imgUrl && <img src={message.user.imgUrl} />}
               <div>
                 {message.user && (
-                  <h3>{message.user.username || message.user.fullName}</h3>
+                  <h3>
+                    {message.user.username || message.user.fullName || 'anyone'}
+                  </h3>
                 )}
                 <p>{message.date}</p>
               </div>

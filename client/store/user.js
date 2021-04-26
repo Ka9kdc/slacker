@@ -59,7 +59,7 @@ export const logout = () => async dispatch => {
 export const updateProfile = profileObj => {
   return async dispatch => {
     try {
-      const res = await axios.put(`/api/user/`, profileObj)
+      const res = await axios.put(`/api/users/`, profileObj)
       dispatch(getUser(res.data))
     } catch (error) {
       console.error(error)

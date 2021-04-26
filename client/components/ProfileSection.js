@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import {updateProfile} from '../store'
 
 const ProfileSection = props => {
-  const [fullName, setName] = useState(props.user.fullName)
-  const [username, setUserName] = useState(props.user.username)
+  const [fullName, setName] = useState(props.user.fullName || '')
+  const [username, setUserName] = useState(props.user.username || '')
 
   const submitUpdate = evt => {
-    evt.preventDefualt()
+    evt.preventDefault()
     const updateObj = props.user
     if (fullName !== '' || fullName !== ' ') {
       updateObj.fullName = fullName
@@ -15,6 +16,7 @@ const ProfileSection = props => {
       updateObj.username = username
     }
     props.updateProfile(updateObj)
+    console.log('hello')
     props.setEditProfile(false)
   }
 

@@ -12,13 +12,13 @@ const MainSection = props => {
   useEffect(() => {
     props.fetchMessages()
   }, currentChannel)
-
+  console.log(editProfile, props.user)
   return (
     <div>
       <button type="button" onClick={() => setChannel(currentChannel + 1)}>
         current Channel = {currentChannel}
       </button>
-      {(props.user && (!props.user.fullname || !props.user.username)) ||
+      {(props.user && (!props.user.fullName || !props.user.username)) ||
       editProfile ? (
         <ProfileSection setEditProfile={setEditProfile} />
       ) : (

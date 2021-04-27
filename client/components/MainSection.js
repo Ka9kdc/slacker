@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {fetchMessages} from '../store/messages'
 import MessageBox from './MessageBox'
 import {connect} from 'react-redux'

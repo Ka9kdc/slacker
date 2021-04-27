@@ -71,12 +71,8 @@ router.post('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    const allChannels = req.body.channels
-    await allChannels.forEach(async channel => {
-      if (channel.joined) await req.user.addChannel(channel.id)
-    })
-    const myChannels = await req.user.getChannels()
-    res.send(myChannels)
+    const channel = await req.user.addChannel(req.body.channelId)
+    res.send(channel[0])
   } catch (error) {
     next(error)
   }

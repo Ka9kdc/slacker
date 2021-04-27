@@ -12,11 +12,11 @@ const ChannelOptions = props => {
     () => {
       if (joinMore) {
         props.fetchAll()
-        // } else {
-        //   props.fetchMine()
+      } else {
+        props.fetchMine()
       }
     },
-    [joinMore]
+    [props.channels.length, joinMore]
   )
 
   return (

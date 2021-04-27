@@ -14,7 +14,7 @@ const setChannels = channels => {
   }
 }
 
-export const joinChannel = channelId => {
+const joinedChannel = channelId => {
   return {
     type: JOIN_CHANNEL,
     channelId
@@ -50,12 +50,11 @@ export const fetchAllChannels = () => {
   }
 }
 
-export const updateChannels = channels => {
+export const joinChannel = channelId => {
   return async dispatch => {
     try {
-      const res = await axios.put('/api/channels', {channels})
-      console.log(res.data)
-      dispatch(setChannels(res.data))
+      const res = await axios.put('/api/channels', {channelId})
+      dispatch(joinedChannel(res.data.channelId))
     } catch (error) {
       console.error(error)
     }

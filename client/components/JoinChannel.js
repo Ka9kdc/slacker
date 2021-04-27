@@ -1,11 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {joinChannel, updateChannels} from '../store/channels'
+import {joinChannel} from '../store/channels'
 
 const JoinChannel = props => {
   const submitUpdate = evt => {
     evt.preventDefault()
-    props.submitChannelUpdate(props.channels)
     props.changeJoinMore(false)
   }
   return (
@@ -27,7 +26,7 @@ const JoinChannel = props => {
           </div>
         ))}
       <button type="submit" onClick={submitUpdate}>
-        Save
+        done
       </button>
     </div>
   )
@@ -41,8 +40,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    joinChannel: channelId => dispatch(joinChannel(channelId)),
-    submitChannelUpdate: channels => dispatch(updateChannels(channels))
+    joinChannel: channelId => dispatch(joinChannel(channelId))
   }
 }
 

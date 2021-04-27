@@ -61,7 +61,6 @@ export const createMessage = (text, channelId) => {
     try {
       const res = await axios.post('/api/messages', {text, channelId})
       dispatch(addMessage(res.data))
-
       socket.emit('new message', res.data)
     } catch (error) {
       console.error(error.message)

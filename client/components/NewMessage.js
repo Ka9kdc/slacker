@@ -7,7 +7,7 @@ const NewMessage = props => {
 
   const submitMessage = evt => {
     evt.preventDefault()
-    props.addMessage(text, props.currentChannel)
+    props.addMessage(text, props.currentChannel.id)
     setMessage('')
   }
 
@@ -21,10 +21,16 @@ const NewMessage = props => {
   )
 }
 
+const mapState = state => {
+  return {
+    currentChannel: state.currentChannel
+  }
+}
+
 const mapDispatch = dispatch => {
   return {
     addMessage: (text, channelId) => dispatch(createMessage(text, channelId))
   }
 }
 
-export default connect(null, mapDispatch)(NewMessage)
+export default connect(mapState, mapDispatch)(NewMessage)

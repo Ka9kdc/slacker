@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {fetchAllChannels, fetchChannels} from '../store/channels'
+import {setChannel, setChannelAndGetMessages} from '../store/currentChannel'
 import AddChannel from './AddChannel'
 import JoinChannel from './JoinChannel'
 
@@ -26,7 +27,7 @@ const ChannelOptions = props => {
             <button
               type="button"
               onClick={() => {
-                props.setChannel(channel.id)
+                props.setChannel(channel)
               }}
               key={channel.id}
             >
@@ -61,7 +62,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchAll: () => dispatch(fetchAllChannels()),
-    fetchMine: () => dispatch(fetchChannels())
+    fetchMine: () => dispatch(fetchChannels()),
+    setChannel: channel => dispatch(setChannelAndGetMessages(channel))
   }
 }
 

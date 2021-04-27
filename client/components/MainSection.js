@@ -7,23 +7,11 @@ import ProfileSection from './ProfileSection'
 import ChannelOptions from './ChannelOptions'
 
 const MainSection = props => {
-  const [currentChannel, setChannel] = useState(0)
   const [editProfile, setEditProfile] = useState(false)
-
-  useEffect(
-    () => {
-      if (currentChannel !== 0) {
-        props.fetchMessages(currentChannel)
-      } else if (props.channels && props.channels.length) {
-        setChannel(props.channels[0].id)
-      }
-    },
-    [props.channels, currentChannel]
-  )
 
   return (
     <div>
-      <ChannelOptions setChannel={setChannel} />
+      <ChannelOptions />
       {(props.user && (!props.user.fullName || !props.user.username)) ||
       editProfile ? (
         <ProfileSection setEditProfile={setEditProfile} />
@@ -32,8 +20,9 @@ const MainSection = props => {
           Edit Profile
         </button>
       )}
+      <h2>{props.currentChannel.name}</h2>
       <MessageBox />
-      <NewMessage currentChannel={currentChannel} />
+      <NewMessage />
     </div>
   )
 }
@@ -41,7 +30,8 @@ const MainSection = props => {
 const mapState = state => {
   return {
     user: state.user,
-    channels: state.channels
+    channels: state.channels,
+    currentChannel: state.currentChannel
   }
 }
 

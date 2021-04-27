@@ -17,21 +17,25 @@ router.get('/all', async (req, res, next) => {
     const allChannels = await Channel.findAll({attributes: ['id', 'name']})
     let myChannels = await req.user.getChannels()
     let markedChannels
+    console.log(myChannels.length)
     if (myChannels.length === allChannels.length) {
       markedChannels = allChannels.map(channel => {
-        channel.joined = true
+        channel.dataValues.joined = true
         return channel
       })
     } else if (myChannels.length && allChannels.length) {
       myChannels = myChannels.map(channel => channel.id)
+      console.log(myChannels)
       markedChannels = allChannels.map(channel => {
-        if (myChannels.indexOf(channel.id) !== -1) channel.joined = true
-        else channel.joined = false
+        if (myChannels.indexOf(channel.id) !== -1)
+          channel.dataValues.joined = true
+        else channel.dataValues.joined = false
         return channel
       })
+      console.log(markedChannels)
     } else if (allChannels.length) {
       markedChannels = allChannels.map(channel => {
-        channel.joined = false
+        channel.dataValues.joined = false
         return channel
       })
     } else {
@@ -69,7 +73,7 @@ router.put('/', async (req, res, next) => {
   try {
     const allChannels = req.body.channels
     await allChannels.forEach(async channel => {
-      if (channel.joined) await req.user.addChannel(channel)
+      if (channel.joined) await req.user.addChannel(channel.id)
     })
     const myChannels = await req.user.getChannels()
     res.send(myChannels)
